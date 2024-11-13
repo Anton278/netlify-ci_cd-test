@@ -8,9 +8,9 @@ jobs:
 
     steps:
       - name: Clone repo
-      - uses: actions/checkout@v4
+        uses: actions/checkout@v4
       - name: LS repo directory
-      - run: |
+        run: |
           ls ${{ github.workspace }}
       - name: Use Node.js
         uses: actions/setup-node@v4
