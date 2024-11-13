@@ -13,4 +13,4 @@ jobs:
         with:
           node-version: "20.x"
       - run: |
-        node -v
+          node -v
