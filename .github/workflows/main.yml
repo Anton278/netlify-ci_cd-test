@@ -35,7 +35,6 @@ jobs:
         with:
           name: build
           path: build
-      - run: echo $NETLIFY_AUTH_TOKEN
-      - run: echo $NETLIFY_SITE_ID
+      - run: echo ${{ vars.NETLIFY_AUTH_TOKEN }}
       # - name: Netlify manual deploy
       #   run: netlify deploy --prod
