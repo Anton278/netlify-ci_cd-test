@@ -35,4 +35,5 @@ jobs:
         with:
           name: build
           path: build
-      - run: ls
+      - name: Netlify manual deploy
+        run: netlify deploy --prod
