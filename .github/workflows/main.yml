@@ -7,8 +7,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clone repo
-        uses: actions/checkout@v4
+      # - name: Clone repo
+      #   uses: actions/checkout@v4
       - run: |
           ls
       # - name: LS repo directory
