@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Clone repo
         uses: actions/checkout@v4
-        run: |
+      - run: |
           ls
       # - name: LS repo directory
       #   run: |
