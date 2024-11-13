@@ -16,4 +16,10 @@ jobs:
           cache: "npm"
       - name: Install dependencies
         run: npm install
-      - run: ls
+      - name: Build
+        run: npm run build
+  Deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      -run: ls
