@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # > Personal access token (PAT) used to fetch the repository. We recommend using a service account with the least permissions necessary
       - name: Clone repo
         uses: actions/checkout@v4
       - name: Use Node.js
@@ -33,5 +34,5 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build
+          path: build
       - run: ls
-      - run: ls build
