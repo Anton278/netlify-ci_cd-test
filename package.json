@@ -2,7 +2,7 @@
   "name": "netlify-ci_cd-test",
   "version": "0.1.0",
   "engines": {
-    "node": "22"
+    "node": "~22.11.0"
   },
   "private": true,
   "dependencies": {
