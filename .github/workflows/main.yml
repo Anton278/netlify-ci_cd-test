@@ -27,6 +27,7 @@ jobs:
         with:
           name: build
           path: build
+          retention-days: 1
 
   Deploy:
     runs-on: ubuntu-latest
@@ -43,7 +44,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "lts/Jod"
-          cache: "npm"
       - name: Install netlify-cli
         run: npm install -g netlify-cli
       - name: Netlify manual deploy
