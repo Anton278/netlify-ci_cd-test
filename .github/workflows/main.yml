@@ -1,0 +1,53 @@
+name: Main
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: "package.json"
+          cache: "npm"
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: build
+          retention-days: 1
+
+  Deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ (github.ref == 'refs/heads/main' && 'Production') || (github.ref == 'refs/heads/dev' && 'Development') }}
+
+    needs: Build
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: build
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/Jod"
+      - name: Install netlify-cli
+        run: npm install -g netlify-cli
+      - name: Netlify manual deploy
+        run: netlify deploy --prod
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
