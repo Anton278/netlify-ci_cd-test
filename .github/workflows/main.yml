@@ -1,11 +1,14 @@
 name: Main
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+      - dev
 
 jobs:
   Build:
     runs-on: ubuntu-latest
-    environment: Development
 
     steps:
       # > Personal access token (PAT) used to fetch the repository. We recommend using a service account with the least permissions necessary
@@ -29,7 +32,7 @@ jobs:
 
   Deploy:
     runs-on: ubuntu-latest
-    environment: Development
+    environment: ${{ github.ref == 'refs/heads/main' && 'Production' || 'Development' }}
 
     needs: Build
     steps:
