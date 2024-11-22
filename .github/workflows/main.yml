@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - run: echo "${{ github.ref }}""
       # > Personal access token (PAT) used to fetch the repository. We recommend using a service account with the least permissions necessary
       - name: Clone repo
         uses: actions/checkout@v4
@@ -21,6 +22,7 @@ jobs:
           cache: "npm"
       - run: node -v
       - name: Install dependencies
+        # npm ci
         run: npm install
       - name: Build
         run: npm run build
