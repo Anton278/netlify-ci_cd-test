@@ -5,6 +5,7 @@ on: [push]
 jobs:
   Build:
     runs-on: ubuntu-latest
+    environment: Development
 
     steps:
       # > Personal access token (PAT) used to fetch the repository. We recommend using a service account with the least permissions necessary
@@ -28,6 +29,7 @@ jobs:
 
   Deploy:
     runs-on: ubuntu-latest
+    environment: Development
 
     needs: Build
     steps:
