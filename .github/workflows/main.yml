@@ -11,19 +11,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo "${{ github.ref }}""
-      # > Personal access token (PAT) used to fetch the repository. We recommend using a service account with the least permissions necessary
       - name: Clone repo
         uses: actions/checkout@v4
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version-file: "package.json"
-          cache: "npm"
-      - run: node -v
       - name: Install dependencies
-        # npm ci
-        run: npm install
+        run: npm ci
       - name: Build
         run: npm run build
       - name: Upload artifact
@@ -34,7 +29,7 @@ jobs:
 
   Deploy:
     runs-on: ubuntu-latest
-    environment: ${{ github.ref == 'refs/heads/main' && 'Production' || 'Development' }}
+    environment: ${{ (github.ref == 'refs/heads/main' && 'Production') || (github.ref == 'refs/heads/dev' && 'Development') }}
 
     needs: Build
     steps:
@@ -48,7 +43,7 @@ jobs:
         with:
           node-version: "lts/Jod"
       - name: Install netlify-cli
-        run: npm install netlify-cli -g
+        run: npm install -g netlify-cli
       - name: Netlify manual deploy
         run: netlify deploy --prod
         env:
